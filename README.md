@@ -19,6 +19,7 @@ The components look better than the default WinForms ones.
 
 ## To do list
 * ~~Make an overall architecture of how everything is gonna work~~
-* Grid form to delete or keep a list of the questions/answers
+* ~~Grid form to delete or keep a list of the questions/answers~~
 * CRUD form to create/update questions
+* Deleting multiple questions from Grid form
 * Exam form to actually exam the students
