@@ -2,6 +2,7 @@
 using ExamProj.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ExamProj
@@ -22,6 +23,7 @@ namespace ExamProj
                 for (int i = 0; i < 5; i++)
                 {
                     Answer answer = new Answer();
+                    answer.AnswerName = "";
                     question.Answers.Add(answer);
                 }
             }
@@ -32,6 +34,36 @@ namespace ExamProj
             question.QuestionName = questionTxt.Text;
             question.Difficulty = difficultyCmb.Text;
             question.Answers = ((List<Answer>)gridControl.DataSource);
+            if (question.QuestionName == "")
+            {
+                MessageBox.Show("Question can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (question.Difficulty == "")
+            {
+                MessageBox.Show("Difficulty can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (question.Answers.Any(x => x.AnswerName == ""))
+            {
+                MessageBox.Show($"Answer {question.Answers.IndexOf(question.Answers.FirstOrDefault(x => x.AnswerName == "")) + 1} can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (question.Answers.Count != question.Answers.Select(x => x.AnswerName).Distinct().Count())
+            {
+                MessageBox.Show("Multiple answers can't be the same!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (question.Answers.Where(x => x.IsCorrect).ToList().Count > 1)
+            {
+                MessageBox.Show("There can only be one correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            else if (question.Answers.Where(x => x.IsCorrect).ToList().Count == 0)
+            {
+                MessageBox.Show("There must be a correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             if (question.ID != 0)
             {
                 try

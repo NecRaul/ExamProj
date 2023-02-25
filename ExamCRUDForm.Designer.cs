@@ -127,6 +127,8 @@
             this.difficultyCmb.Name = "difficultyCmb";
             this.difficultyCmb.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.difficultyCmb.Properties.Appearance.Options.UseFont = true;
+            this.difficultyCmb.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.difficultyCmb.Properties.AppearanceDropDown.Options.UseFont = true;
             this.difficultyCmb.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.difficultyCmb.Properties.DropDownRows = 3;
@@ -190,6 +192,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 324);
+            this.MaximizeBox = false;
             this.Controls.Add(this.answerLbl);
             this.Controls.Add(this.difficultyLbl);
             this.Controls.Add(this.questionLbl);
