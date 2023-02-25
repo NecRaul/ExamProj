@@ -73,6 +73,8 @@
             this.gridView.OptionsCustomization.AllowColumnResizing = false;
             this.gridView.OptionsDetail.EnableMasterViewMode = false;
             this.gridView.OptionsMenu.EnableColumnMenu = false;
+            this.gridView.OptionsSelection.MultiSelect = true;
+            this.gridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             // 
             // colID
             // 
