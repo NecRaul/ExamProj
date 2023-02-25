@@ -18,7 +18,7 @@ If there's an issue regarding DevExpress during the initial build, use Project C
 The components look better than the default WinForms ones.
 
 ## To do list
-* Decide/make an overall architecture of how everything is gonna work
+* ~~Make an overall architecture of how everything is gonna work~~
 * Grid form to delete or keep a list of the questions/answers
 * CRUD form to create/update questions
 * Exam form to actually exam the students
