@@ -35,5 +35,5 @@ You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-w
 * ~~Grid form to delete, add, preview and keep a list of the questions/answers~~
 * ~~Deleting multiple questions from Grid form~~
 * ~~CRUD form to create/update questions~~
-* Validations for CRUD form
+* ~~Validations for CRUD form~~
 * Exam form to actually exam the students
