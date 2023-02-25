@@ -29,7 +29,8 @@ namespace ExamProj
             {
                 var selectedQuestion = Convert.ToInt32(gridView.GetFocusedRowCellValue("ID"));
                 question = _questionServices.GetQuestionByID(selectedQuestion);
-                //CRUD Form Preview
+                ExamCRUDForm form = new ExamCRUDForm(question, _questionServices);
+                form.ShowDialog();
                 RefreshQuestions();
                 question = new Question();
             }
@@ -38,16 +39,31 @@ namespace ExamProj
         }
         private void newBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //CRUD Form New
+            ExamCRUDForm form = new ExamCRUDForm(question, _questionServices);
+            form.ShowDialog();
             RefreshQuestions();
             question = new Question();
         }
         private void deleteBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //Multiple deletions at the same time
-            if (gridView.FocusedRowHandle > -1)
+            DialogResult result;
+            if (gridView.SelectedRowsCount > 0)
             {
-                var result = MessageBox.Show("Are you sure about deleting this question?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                result = MessageBox.Show("Are you sure about deleting these questions?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    foreach (var row in gridView.GetSelectedRows())
+                    {
+                        var selectedQuestion = Convert.ToInt32(gridView.GetRowCellValue(row, "ID"));
+                        _questionServices.DeleteQuestion(selectedQuestion);
+                    }
+                    MessageBox.Show($"Questions were deleted.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    RefreshQuestions();
+                }
+            }
+            else if (gridView.FocusedRowHandle > -1)
+            {
+                result = MessageBox.Show("Are you sure about deleting this question?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     var selectedQuestion = Convert.ToInt32(gridView.GetFocusedRowCellValue("ID"));
