@@ -13,7 +13,7 @@ namespace ExamProj
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExamGridForm());
+            Application.Run(new ExamLoginForm());
         }
     }
 }
