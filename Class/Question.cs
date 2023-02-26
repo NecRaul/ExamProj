@@ -26,6 +26,7 @@ namespace ExamProj.Class
                 return _correctAnswer;
             }
         }
+        public bool IsAnswered = false;
         public List<Answer> Answers { get; set; } = new List<Answer>();
     }
 }
