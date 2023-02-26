@@ -57,4 +57,5 @@ You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-w
 * ~~User Grid Form to delete, add, preview and keep a list of users~~
 * ~~User CRUD Form to create/update users~~
 * ~~Validations for User CRUD Form~~
-* Show who's taking the exam in Exam Form
+* ~~Show who's taking the exam in Exam Form~~
+* ~~User analytics (how many questions/answers etc.)~~

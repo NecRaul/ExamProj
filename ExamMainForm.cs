@@ -16,16 +16,21 @@ namespace ExamProj
         public List<Question> questions = new List<Question>();
         public List<string> userAnswers = new List<string>();
         public List<int> userRadioGroupIndices = new List<int>();
+        public User user = new User();
         public int questionNumber;
         private IQuestionServices _questionServices { get; set; }
-        public ExamMainForm()
+        private IUserServices _userServices { get; set; }
+        public ExamMainForm(User user)
         {
             InitializeComponent();
-            Random random = new Random();
+            this.user = user;
+            usernameLbl.Text = $"Username: {user.Username}";
             _questionServices = new QuestionServices(new Repository<Question>(new ExamDbContext()));
+            _userServices = new UserServices(new Repository<User>(new ExamDbContext()));
             List<Question> easyQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Easy").ToList();
             List<Question> normalQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Normal").ToList();
             List<Question> hardQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Hard").ToList();
+            Random random = new Random();
             questions.AddRange(easyQuestions.OrderBy(x => random.Next()).Take(10).ToList());
             questions.AddRange(normalQuestions.OrderBy(x => random.Next()).Take(10).ToList());
             questions.AddRange(hardQuestions.OrderBy(x => random.Next()).Take(5).ToList());
@@ -112,6 +117,14 @@ namespace ExamProj
                 radioGroup.Enabled = false;
                 clearAnswerBtn.Enabled = false;
                 finishExamBtn.Enabled = false;
+                user.TotalQuestions += 25;
+                user.CorrectAnswers += correctAnswerCounter;
+                user.IncorrectAnswers += incorrectAnswerCounter;
+                user.NotAnswered += notAnsweredCounter;
+                if (user.ID != 0)
+                    _userServices.UpdateUser(user);
+                else
+                    _userServices.InsertUser(user);
             }
             else
                 return;

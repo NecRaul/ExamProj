@@ -11,6 +11,7 @@ namespace ExamProj
 {
     public partial class ExamHomeForm : DevExpress.XtraEditors.XtraForm
     {
+        public User user = new User();
         public ExamHomeForm(User user)
         {
             InitializeComponent();
@@ -33,18 +34,16 @@ namespace ExamProj
         }
         private void examBtn_Click(object sender, EventArgs e)
         {
-            ExamMainForm form = new ExamMainForm();
+            ExamMainForm form = new ExamMainForm(user);
             try
             {
                 form.ShowDialog();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                string exceptionDesc = exception.ToString();
                 return;
             }
         }
-
         private void logOutBtn_Click(object sender, EventArgs e)
         {
             Close();
