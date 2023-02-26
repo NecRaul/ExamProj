@@ -53,6 +53,7 @@
             this.question25 = new DevExpress.XtraEditors.SimpleButton();
             this.clearAnswerBtn = new DevExpress.XtraEditors.SimpleButton();
             this.finishExamBtn = new DevExpress.XtraEditors.SimpleButton();
+            this.usernameLbl = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)this.radioGroup.Properties).BeginInit();
             this.SuspendLayout();
             // 
@@ -379,11 +380,24 @@
             this.finishExamBtn.Text = "Finish Exam";
             this.finishExamBtn.Click += new System.EventHandler(this.finishExamBtn_Click);
             // 
-            // ExamMainQuizForm
+            // usernameLbl
+            // 
+            this.usernameLbl.Appearance.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.usernameLbl.Appearance.Options.UseFont = true;
+            this.usernameLbl.Appearance.Options.UseTextOptions = true;
+            this.usernameLbl.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.usernameLbl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.usernameLbl.Location = new System.Drawing.Point(39, 22);
+            this.usernameLbl.Name = "usernameLbl";
+            this.usernameLbl.Size = new System.Drawing.Size(1200, 33);
+            this.usernameLbl.TabIndex = 29;
+            // 
+            // ExamMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 688);
+            this.Controls.Add(usernameLbl);
             this.Controls.Add(finishExamBtn);
             this.Controls.Add(clearAnswerBtn);
             this.Controls.Add(question25);
@@ -452,5 +466,6 @@
         private DevExpress.XtraEditors.SimpleButton question25;
         private DevExpress.XtraEditors.SimpleButton clearAnswerBtn;
         private DevExpress.XtraEditors.SimpleButton finishExamBtn;
+        private DevExpress.XtraEditors.LabelControl usernameLbl;
     }
 }
