@@ -1,11 +1,5 @@
 ﻿using ExamProj.Class;
-using ExamProj.Context;
-using ExamProj.Repositories;
-using ExamProj.Services;
-using ExamProj.Services.Interfaces;
 using System;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace ExamProj
 {

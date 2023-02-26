@@ -59,3 +59,4 @@ You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-w
 * ~~Validations for User CRUD Form~~
 * ~~Show who's taking the exam in Exam Form~~
 * ~~User analytics (how many questions/answers etc.)~~
+* ~~Show which questions were answered correctly, incorrectly and not answered in Exam Form~~

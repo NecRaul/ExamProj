@@ -36,32 +36,32 @@ namespace ExamProj
             question.Answers = ((List<Answer>)gridControl.DataSource);
             if (question.QuestionName == "")
             {
-                MessageBox.Show("Question can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Question can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (question.Difficulty == "")
             {
-                MessageBox.Show("Difficulty can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Difficulty can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (question.Answers.Any(x => x.AnswerName == ""))
             {
-                MessageBox.Show($"Answer {question.Answers.IndexOf(question.Answers.FirstOrDefault(x => x.AnswerName == "")) + 1} can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show($"Answer {question.Answers.IndexOf(question.Answers.FirstOrDefault(x => x.AnswerName == "")) + 1} can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (question.Answers.Count != question.Answers.Select(x => x.AnswerName).Distinct().Count())
             {
-                MessageBox.Show("Multiple answers can't be the same!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Multiple answers can't be the same!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (question.Answers.Where(x => x.IsCorrect).ToList().Count > 1)
             {
-                MessageBox.Show("There can only be one correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("There can only be one correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (question.Answers.Where(x => x.IsCorrect).ToList().Count == 0)
             {
-                MessageBox.Show("There must be a correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("There must be a correct answer!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (question.ID != 0)
