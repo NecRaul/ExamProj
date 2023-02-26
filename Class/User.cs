@@ -4,10 +4,6 @@ namespace ExamProj.Class
     {
         public string Username { get; set; }
         public string Password { get; set; }
-        public bool IsTeacher { get; set; }
-        public int TotalQuestions { get; set; }
-        public int CorrectQuestions { get; set; }
-        public int IncorrectQuestions { get; set; }
-        public int NotAnsweredQuestions { get; set; }
+        public bool IsTeacher { get; set; } = false;
     }
 }

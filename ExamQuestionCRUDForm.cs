@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace ExamProj
 {
-    public partial class ExamCRUDForm : DevExpress.XtraEditors.XtraForm
+    public partial class ExamQuestionCRUDForm : DevExpress.XtraEditors.XtraForm
     {
         public Question question = new Question();
         private IQuestionServices _questionServices { get; set; }
-        public ExamCRUDForm(Question question, IQuestionServices _questionServices)
+        public ExamQuestionCRUDForm(Question question, IQuestionServices _questionServices)
         {
             InitializeComponent();
             this.question = question;

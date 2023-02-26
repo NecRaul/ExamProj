@@ -1,6 +1,6 @@
 ﻿namespace ExamProj
 {
-    partial class ExamCRUDForm
+    partial class ExamQuestionCRUDForm
     {
         /// <summary>
         /// Required designer variable.
@@ -37,36 +37,30 @@
             this.questionLbl = new DevExpress.XtraEditors.LabelControl();
             this.difficultyLbl = new DevExpress.XtraEditors.LabelControl();
             this.answerLbl = new DevExpress.XtraEditors.LabelControl();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.isCorrectCheck)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.questionTxt.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.difficultyCmb.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.gridControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.gridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.isCorrectCheck).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.questionTxt.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)this.difficultyCmb.Properties).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl
             // 
             this.gridControl.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl.Location = new System.Drawing.Point(103, 146);
-            this.gridControl.MainView = this.gridView;
+            this.gridControl.MainView = gridView;
             this.gridControl.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl.Name = "gridControl";
-            this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.isCorrectCheck});
+            this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { isCorrectCheck });
             this.gridControl.Size = new System.Drawing.Size(741, 130);
             this.gridControl.TabIndex = 0;
-            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView});
+            this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView });
             // 
             // gridView
             // 
-            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colID,
-            this.colQuestionID,
-            this.colAnswerName,
-            this.colIsCorrect});
+            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colID, colQuestionID, colAnswerName, colIsCorrect });
             this.gridView.DetailHeight = 239;
-            this.gridView.GridControl = this.gridControl;
+            this.gridView.GridControl = gridControl;
             this.gridView.Name = "gridView";
             this.gridView.OptionsCustomization.AllowColumnMoving = false;
             this.gridView.OptionsCustomization.AllowGroup = false;
@@ -99,7 +93,7 @@
             // 
             // colIsCorrect
             // 
-            this.colIsCorrect.ColumnEdit = this.isCorrectCheck;
+            this.colIsCorrect.ColumnEdit = isCorrectCheck;
             this.colIsCorrect.FieldName = "IsCorrect";
             this.colIsCorrect.Name = "colIsCorrect";
             this.colIsCorrect.Visible = true;
@@ -129,13 +123,9 @@
             this.difficultyCmb.Properties.Appearance.Options.UseFont = true;
             this.difficultyCmb.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Tahoma", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.difficultyCmb.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.difficultyCmb.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.difficultyCmb.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             this.difficultyCmb.Properties.DropDownRows = 3;
-            this.difficultyCmb.Properties.Items.AddRange(new object[] {
-            "Easy",
-            "Normal",
-            "Hard"});
+            this.difficultyCmb.Properties.Items.AddRange(new object[] { "Easy", "Normal", "Hard" });
             this.difficultyCmb.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.difficultyCmb.Size = new System.Drawing.Size(741, 32);
             this.difficultyCmb.TabIndex = 7;
@@ -187,30 +177,30 @@
             this.answerLbl.TabIndex = 11;
             this.answerLbl.Text = "Answers:";
             // 
-            // ExamCRUDForm
+            // ExamQuestionCRUDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 324);
+            this.Controls.Add(answerLbl);
+            this.Controls.Add(difficultyLbl);
+            this.Controls.Add(questionLbl);
+            this.Controls.Add(saveBtn);
+            this.Controls.Add(difficultyCmb);
+            this.Controls.Add(questionTxt);
+            this.Controls.Add(gridControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Controls.Add(this.answerLbl);
-            this.Controls.Add(this.difficultyLbl);
-            this.Controls.Add(this.questionLbl);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.difficultyCmb);
-            this.Controls.Add(this.questionTxt);
-            this.Controls.Add(this.gridControl);
-            this.Name = "ExamCRUDForm";
+            this.Name = "ExamQuestionCRUDForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CRUD";
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.isCorrectCheck)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.questionTxt.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.difficultyCmb.Properties)).EndInit();
+            this.Text = "Question CRUD";
+            ((System.ComponentModel.ISupportInitialize)this.gridControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.gridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.isCorrectCheck).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.questionTxt.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)this.difficultyCmb.Properties).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
         #endregion
 

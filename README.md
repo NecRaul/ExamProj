@@ -25,6 +25,19 @@ The components look better and are easier to work with than the default WinForms
 
 After converting/building the project, put the database file **`ExamDb.sqlite`** in `bin\Debug\net6.0-windows` folder. At that point, you can carry the `net6.0-windows` folder with you to any machine running Windows and carry your questions/answers there with you.
 
+## Login
+
+I've provided a default `.sqlite` database for use.
+
+``` User Credentials
+Username: admin
+Password: admin
+```
+
+## How to take an exam
+
+You must have atleast 25 questions in the database (10 easy, 10 normal, 5 hard) to take an exam.
+
 ## How to work with multiple databases at the same time
 
 You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-windows` folder under different names and change Data Source in `ExamProj.dll.config` to whichever database you want to work with at the time.
@@ -32,14 +45,16 @@ You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-w
 ## To do list
 
 * ~~Make an overall architecture of how everything is gonna work~~
-* ~~Grid form to delete, add, preview and keep a list of the questions/answers~~
-* ~~Deleting multiple questions from Grid form~~
-* ~~CRUD form to create/update questions~~
-* ~~Validations for CRUD form~~
-* ~~Exam form to actually exam the students~~
-* ~~Validations for Exam form~~
+* ~~Question Grid Form to delete, add, preview and keep a list of the questions/answers~~
+* ~~Deleting multiple questions from Grid Form~~
+* ~~Question CRUD Form to create/update questions~~
+* ~~Validations for Question CRUD Form~~
+* ~~Exam Form to actually exam the students~~
+* ~~Validations for Exam Form~~
 * ~~User class and distinguishing between student and teacher~~
-* ~~Student's overall question analytics~~
-* Login form
-* Show who's taking the exam
-* Ribbon form to connect everything
+* ~~Login Form~~
+* ~~Home screen Form to connect everything~~
+* ~~User Grid Form to delete, add, preview and keep a list of users~~
+* ~~User CRUD Form to create/update users~~
+* ~~Validations for User CRUD Form~~
+* Show who's taking the exam in Exam Form

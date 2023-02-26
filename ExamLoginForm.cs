@@ -17,6 +17,7 @@ namespace ExamProj
         {
             InitializeComponent();
             _userServices = new UserServices(new Repository<User>(new ExamDbContext()));
+            passwordTxt.Properties.PasswordChar = '*';
         }
         private void loginBtn_Click(object sender, EventArgs e)
         {
@@ -28,9 +29,8 @@ namespace ExamProj
             }
             else
             {
-                //Pass User To The Ribbon Form
-                //Ribbon Form Show
-                Close();
+                ExamHomeForm form = new ExamHomeForm(user);
+                form.ShowDialog();
             }
         }
     }

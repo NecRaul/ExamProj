@@ -34,18 +34,21 @@ namespace ExamProj
                 MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
-            for (int i = 0; i < 25; i++)
+            else
             {
-                userAnswers.Add("");
-                userRadioGroupIndices.Add(-1);
+                for (int i = 0; i < 25; i++)
+                {
+                    userAnswers.Add("");
+                    userRadioGroupIndices.Add(-1);
+                }
+                radioGroup.SelectedIndex = -1;
+                questionLbl.Text = questions[0].QuestionName;
+                for (int i = 0; i < 5; i++)
+                {
+                    radioGroup.Properties.Items[i].Description = questions[0].Answers[i].AnswerName;
+                }
+                questionNumber = 0;
             }
-            radioGroup.SelectedIndex = -1;
-            questionLbl.Text = questions[0].QuestionName;
-            for (int i = 0; i < 5; i++)
-            {
-                radioGroup.Properties.Items[i].Description = questions[0].Answers[i].AnswerName;
-            }
-            questionNumber = 0;
         }
         private void radioGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -107,6 +110,8 @@ namespace ExamProj
                 }
                 MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}");
                 radioGroup.Enabled = false;
+                clearAnswerBtn.Enabled = false;
+                finishExamBtn.Enabled = false;
             }
             else
                 return;
