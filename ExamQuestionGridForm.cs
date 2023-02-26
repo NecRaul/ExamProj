@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace ExamProj
 {
-    public partial class ExamGridForm : DevExpress.XtraEditors.XtraForm
+    public partial class ExamQuestionGridForm : DevExpress.XtraEditors.XtraForm
     {
         public Question question = new Question();
         private IQuestionServices _questionServices { get; set; }
-        public ExamGridForm()
+        public ExamQuestionGridForm()
         {
             InitializeComponent();
             _questionServices = new QuestionServices(new Repository<Question>(new ExamDbContext()));
@@ -29,7 +29,7 @@ namespace ExamProj
             {
                 var selectedQuestion = Convert.ToInt32(gridView.GetFocusedRowCellValue("ID"));
                 question = _questionServices.GetQuestionByID(selectedQuestion);
-                ExamCRUDForm form = new ExamCRUDForm(question, _questionServices);
+                ExamQuestionCRUDForm form = new ExamQuestionCRUDForm(question, _questionServices);
                 form.ShowDialog();
                 RefreshQuestions();
                 question = new Question();
@@ -39,7 +39,7 @@ namespace ExamProj
         }
         private void newBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ExamCRUDForm form = new ExamCRUDForm(question, _questionServices);
+            ExamQuestionCRUDForm form = new ExamQuestionCRUDForm(question, _questionServices);
             form.ShowDialog();
             RefreshQuestions();
             question = new Question();

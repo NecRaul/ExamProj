@@ -56,6 +56,17 @@
             ((System.ComponentModel.ISupportInitialize)this.radioGroup.Properties).BeginInit();
             this.SuspendLayout();
             // 
+            // questionLbl
+            // 
+            this.questionLbl.Appearance.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.questionLbl.Appearance.Options.UseFont = true;
+            this.questionLbl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+            this.questionLbl.Location = new System.Drawing.Point(39, 61);
+            this.questionLbl.Name = "questionLbl";
+            this.questionLbl.Size = new System.Drawing.Size(1200, 29);
+            this.questionLbl.TabIndex = 26;
+            this.questionLbl.Text = "Question";
+            // 
             // radioGroup
             // 
             this.radioGroup.Location = new System.Drawing.Point(39, 201);
@@ -346,17 +357,6 @@
             this.question25.Text = "25";
             this.question25.Click += new System.EventHandler(this.question_Click);
             // 
-            // questionLbl
-            // 
-            this.questionLbl.Appearance.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.questionLbl.Appearance.Options.UseFont = true;
-            this.questionLbl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-            this.questionLbl.Location = new System.Drawing.Point(39, 61);
-            this.questionLbl.Name = "questionLbl";
-            this.questionLbl.Size = new System.Drawing.Size(1200, 29);
-            this.questionLbl.TabIndex = 26;
-            this.questionLbl.Text = "Question";
-            // 
             // clearAnswerBtn
             // 
             this.clearAnswerBtn.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -379,44 +379,45 @@
             this.finishExamBtn.Text = "Finish Exam";
             this.finishExamBtn.Click += new System.EventHandler(this.finishExamBtn_Click);
             // 
-            // ExamMainForm
+            // ExamMainQuizForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 688);
-            this.Controls.Add(this.finishExamBtn);
-            this.Controls.Add(this.clearAnswerBtn);
-            this.Controls.Add(this.question25);
-            this.Controls.Add(this.question24);
-            this.Controls.Add(this.question23);
-            this.Controls.Add(this.question22);
-            this.Controls.Add(this.question21);
-            this.Controls.Add(this.question20);
-            this.Controls.Add(this.question19);
-            this.Controls.Add(this.question18);
-            this.Controls.Add(this.question17);
-            this.Controls.Add(this.question16);
-            this.Controls.Add(this.question15);
-            this.Controls.Add(this.question14);
-            this.Controls.Add(this.question13);
-            this.Controls.Add(this.question12);
-            this.Controls.Add(this.question11);
-            this.Controls.Add(this.question10);
-            this.Controls.Add(this.question9);
-            this.Controls.Add(this.question8);
-            this.Controls.Add(this.question7);
-            this.Controls.Add(this.question6);
-            this.Controls.Add(this.question5);
-            this.Controls.Add(this.question4);
-            this.Controls.Add(this.question3);
-            this.Controls.Add(this.question2);
-            this.Controls.Add(this.question1);
-            this.Controls.Add(this.radioGroup);
-            this.Controls.Add(this.questionLbl);
+            this.Controls.Add(finishExamBtn);
+            this.Controls.Add(clearAnswerBtn);
+            this.Controls.Add(question25);
+            this.Controls.Add(question24);
+            this.Controls.Add(question23);
+            this.Controls.Add(question22);
+            this.Controls.Add(question21);
+            this.Controls.Add(question20);
+            this.Controls.Add(question19);
+            this.Controls.Add(question18);
+            this.Controls.Add(question17);
+            this.Controls.Add(question16);
+            this.Controls.Add(question15);
+            this.Controls.Add(question14);
+            this.Controls.Add(question13);
+            this.Controls.Add(question12);
+            this.Controls.Add(question11);
+            this.Controls.Add(question10);
+            this.Controls.Add(question9);
+            this.Controls.Add(question8);
+            this.Controls.Add(question7);
+            this.Controls.Add(question6);
+            this.Controls.Add(question5);
+            this.Controls.Add(question4);
+            this.Controls.Add(question3);
+            this.Controls.Add(question2);
+            this.Controls.Add(question1);
+            this.Controls.Add(radioGroup);
+            this.Controls.Add(questionLbl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ExamMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CRUD";
+            this.Text = "Exam";
             ((System.ComponentModel.ISupportInitialize)this.radioGroup.Properties).EndInit();
             this.ResumeLayout(false);
         }
