@@ -113,7 +113,7 @@ namespace ExamProj
                     else
                         incorrectAnswerCounter++;
                 }
-                MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}");
+                MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}", "Exam finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 radioGroup.Enabled = false;
                 clearAnswerBtn.Enabled = false;
                 finishExamBtn.Enabled = false;
@@ -125,6 +125,16 @@ namespace ExamProj
                     _userServices.UpdateUser(user);
                 else
                     _userServices.InsertUser(user);
+                for (int i = 0; i < 25; i++)
+                {
+                    DevExpress.XtraEditors.SimpleButton button = Controls.Find($"question{i + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
+                    if (userAnswers[i] == questions[i].CorrectAnswer)
+                        button.Appearance.BackColor = System.Drawing.Color.Green;
+                    else if (userAnswers[i] == "")
+                        button.Appearance.BackColor = System.Drawing.Color.DarkOrange;
+                    else
+                        button.Appearance.BackColor = System.Drawing.Color.Red;
+                }
             }
             else
                 return;

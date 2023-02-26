@@ -4,8 +4,6 @@ using ExamProj.Repositories;
 using ExamProj.Services;
 using ExamProj.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ExamProj
@@ -30,12 +28,12 @@ namespace ExamProj
             user.IsTeacher = teacherChk.Checked;
             if (user.Username == "")
             {
-                MessageBox.Show("Username can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Username can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (user.Password == "")
             {
-                MessageBox.Show("Password can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Password can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (user.ID != 0)
