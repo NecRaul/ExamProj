@@ -450,5 +450,6 @@
         private DevExpress.XtraEditors.SimpleButton question24;
         private DevExpress.XtraEditors.SimpleButton question25;
         private DevExpress.XtraEditors.SimpleButton clearAnswerBtn;
-        private DevExpress.XtraEditors.SimpleButton finishExamBtn;}
+        private DevExpress.XtraEditors.SimpleButton finishExamBtn;
+    }
 }
