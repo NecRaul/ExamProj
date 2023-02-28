@@ -31,6 +31,21 @@ namespace ExamProj
             List<Question> normalQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Normal").ToList();
             List<Question> hardQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Hard").ToList();
             Random random = new Random();
+            int index;
+            for (int i = 0; i < 10; i++)
+            {
+                index = random.Next(easyQuestions.Count);
+                if (!questions.Contains(easyQuestions[index]))
+                    questions.Add(easyQuestions[index]);
+                index = random.Next(normalQuestions.Count);
+                if (!questions.Contains(easyQuestions[index]))
+                    questions.Add(normalQuestions[index]);
+                if (i % 2 == 0)
+                    continue;
+                index = random.Next(hardQuestions.Count);
+                if (!questions.Contains(hardQuestions[index]))
+                    questions.Add(hardQuestions[index]);
+            }
             questions.AddRange(easyQuestions.OrderBy(x => random.Next()).Take(10).ToList());
             questions.AddRange(normalQuestions.OrderBy(x => random.Next()).Take(10).ToList());
             questions.AddRange(hardQuestions.OrderBy(x => random.Next()).Take(5).ToList());
