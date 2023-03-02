@@ -32,6 +32,11 @@ namespace ExamProj
             List<Question> hardQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Hard").ToList();
             Random random = new Random();
             int index;
+            if (easyQuestions.Count < 10 || normalQuestions.Count < 10 || hardQuestions.Count < 5)
+            {
+                MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+            }
             for (int i = 0; i < 10; i++)
             {
                 index = random.Next(easyQuestions.Count);
@@ -46,26 +51,21 @@ namespace ExamProj
                 if (!questions.Contains(hardQuestions[index]))
                     questions.Add(hardQuestions[index]);
             }
-            if (questions.Count < 25)
+            for (int i = 0; i < 25; i++)
             {
-                MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Close();
+                userAnswers.Add("");
+                userRadioGroupIndices.Add(-1);
             }
-            else
+            radioGroup.SelectedIndex = -1;
+            if (questions.Count > 0)
             {
-                for (int i = 0; i < 25; i++)
-                {
-                    userAnswers.Add("");
-                    userRadioGroupIndices.Add(-1);
-                }
-                radioGroup.SelectedIndex = -1;
                 questionLbl.Text = questions[0].QuestionName;
                 for (int i = 0; i < 5; i++)
                 {
                     radioGroup.Properties.Items[i].Description = questions[0].Answers[i].AnswerName;
                 }
-                questionNumber = 0;
             }
+            questionNumber = 0;
         }
         private void radioGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
