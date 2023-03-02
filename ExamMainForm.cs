@@ -46,9 +46,6 @@ namespace ExamProj
                 if (!questions.Contains(hardQuestions[index]))
                     questions.Add(hardQuestions[index]);
             }
-            questions.AddRange(easyQuestions.OrderBy(x => random.Next()).Take(10).ToList());
-            questions.AddRange(normalQuestions.OrderBy(x => random.Next()).Take(10).ToList());
-            questions.AddRange(hardQuestions.OrderBy(x => random.Next()).Take(5).ToList());
             if (questions.Count < 25)
             {
                 MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
