@@ -37,19 +37,22 @@ namespace ExamProj
                 MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
-            for (int i = 0; i < 10; i++)
+            else
             {
-                index = random.Next(easyQuestions.Count);
-                if (!questions.Contains(easyQuestions[index]))
-                    questions.Add(easyQuestions[index]);
-                index = random.Next(normalQuestions.Count);
-                if (!questions.Contains(easyQuestions[index]))
-                    questions.Add(normalQuestions[index]);
-                if (i % 2 == 0)
-                    continue;
-                index = random.Next(hardQuestions.Count);
-                if (!questions.Contains(hardQuestions[index]))
-                    questions.Add(hardQuestions[index]);
+                for (int i = 0; i < 10; i++)
+                {
+                    index = random.Next(easyQuestions.Count);
+                    if (!questions.Contains(easyQuestions[index]))
+                        questions.Add(easyQuestions[index]);
+                    index = random.Next(normalQuestions.Count);
+                    if (!questions.Contains(easyQuestions[index]))
+                        questions.Add(normalQuestions[index]);
+                    if (i % 2 == 0)
+                        continue;
+                    index = random.Next(hardQuestions.Count);
+                    if (!questions.Contains(hardQuestions[index]))
+                        questions.Add(hardQuestions[index]);
+                }
             }
             for (int i = 0; i < 25; i++)
             {
