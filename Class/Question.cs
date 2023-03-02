@@ -6,16 +6,11 @@ namespace ExamProj.Class
     {
         public string Difficulty { get; set; }
         public string QuestionName { get; set; }
-        private string _correctAnswer;
+        private string _correctAnswer = "";
         public string CorrectAnswer
         {
             get
             {
-                if (Answers == null)
-                {
-                    return "";
-                    
-                }
                 foreach (var answer in Answers)
                 {
                     if (answer.IsCorrect)
