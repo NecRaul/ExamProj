@@ -17,7 +17,7 @@ namespace ExamProj.Services
         }
         public Question GetQuestionByID(int id)
         {
-            return _repository.GetAll.Include(x => x.Answers).AsNoTracking().FirstOrDefault(x => x.ID == id);
+            return _repository.GetAll.Include(x => x.Answers).FirstOrDefault(x => x.ID == id);
         }
         public void InsertQuestion(Question question)
         {
@@ -33,7 +33,7 @@ namespace ExamProj.Services
         }
         public IEnumerable<Question> GetAllQuestions()
         {
-            return _repository.GetAll.Include(x => x.Answers).AsNoTracking();
+            return _repository.GetAll.Include(x => x.Answers);
         }
     }
 }
