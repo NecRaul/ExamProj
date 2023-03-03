@@ -9,6 +9,7 @@ namespace ExamProj
         public ExamHomeForm(User user)
         {
             InitializeComponent();
+            this.user = user;
             welcomeLbl.Text = $"Welcome {user.Username}!";
             if (!user.IsTeacher)
             {

@@ -1,5 +1,6 @@
 ﻿using ExamProj.Class;
 using ExamProj.Context;
+using ExamProj.Properties;
 using ExamProj.Repositories;
 using ExamProj.Services;
 using ExamProj.Services.Interfaces;
@@ -18,6 +19,8 @@ namespace ExamProj
         public List<int> userRadioGroupIndices = new List<int>();
         public User user = new User();
         public int questionNumber;
+        public int correctAnswerIndex;
+        public bool examFinished = false;
         private IQuestionServices _questionServices { get; set; }
         private IUserServices _userServices { get; set; }
         public ExamMainForm(User user)
@@ -31,7 +34,6 @@ namespace ExamProj
             List<Question> normalQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Normal").ToList();
             List<Question> hardQuestions = _questionServices.GetAllQuestions().Where(x => x.Difficulty == "Hard").ToList();
             Random random = new Random();
-            int index;
             if (easyQuestions.Count < 10 || normalQuestions.Count < 10 || hardQuestions.Count < 5)
             {
                 MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -39,8 +41,11 @@ namespace ExamProj
             }
             else
             {
-                for (int i = 0; i < 10; i++)
+                int index;
+                int i = 0;
+                while(questions.Count < 25)
                 {
+                    i++;
                     index = random.Next(easyQuestions.Count);
                     if (!questions.Contains(easyQuestions[index]))
                         questions.Add(easyQuestions[index]);
@@ -64,58 +69,226 @@ namespace ExamProj
             {
                 questionLbl.Text = questions[0].QuestionName;
                 for (int i = 0; i < 5; i++)
-                {
                     radioGroup.Properties.Items[i].Description = questions[0].Answers[i].AnswerName;
-                }
             }
             questionNumber = 0;
         }
         private void radioGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             DevExpress.XtraEditors.SimpleButton currentButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
-            if (radioGroup.SelectedIndex != -1)
-            {
-                questions[questionNumber].IsAnswered = true;
-                userAnswers[questionNumber] = radioGroup.Properties.Items[radioGroup.SelectedIndex].Description;
-                userRadioGroupIndices[questionNumber] = radioGroup.SelectedIndex;
-                currentButton.Appearance.BackColor = System.Drawing.Color.Yellow;
-            }
+            ChangeAnsweredQuestionColor(currentButton);
         }
         private void question_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraEditors.SimpleButton currentButton = sender as DevExpress.XtraEditors.SimpleButton;
-            DevExpress.XtraEditors.SimpleButton previousButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
+            DevExpress.XtraEditors.SimpleButton nextButton = sender as DevExpress.XtraEditors.SimpleButton;
+            DevExpress.XtraEditors.SimpleButton currentButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
+            ChangeAnsweredQuestionColor(currentButton);
+            questionNumber = Int32.Parse(Regex.Match(nextButton.Name, @"\d+").Value) - 1;
+            GetUserAnswer();
+            LoadNextQuestion();
+            if (!examFinished)
+                return;
+            correctAnswerIndex = questions[questionNumber].Answers.FindIndex(x => x.IsCorrect);
+            switch (radioGroup.SelectedIndex)
+            {
+                case -1:
+                    NotAnswered();
+                    break;
+                case 0:
+                    AnsweredOne();
+                    break;
+                case 1:
+                    AnsweredTwo();
+                    break;
+                case 2:
+                    AnsweredThree();
+                    break;
+                case 3:
+                    AnsweredFour();
+                    break;
+                case 4:
+                    AnsweredFive();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void ChangeAnsweredQuestionColor(DevExpress.XtraEditors.SimpleButton currentButton)
+        {
             if (radioGroup.SelectedIndex != -1)
             {
                 questions[questionNumber].IsAnswered = true;
                 userAnswers[questionNumber] = radioGroup.Properties.Items[radioGroup.SelectedIndex].Description;
                 userRadioGroupIndices[questionNumber] = radioGroup.SelectedIndex;
-                previousButton.Appearance.BackColor = System.Drawing.Color.Yellow;
+                if (!examFinished)
+                    currentButton.Appearance.BackColor = System.Drawing.Color.Yellow;
             }
-            questionNumber = Int32.Parse(Regex.Match(currentButton.Name, @"\d+").Value) - 1;
+        }
+        private void LoadNextQuestion()
+        {
+            questionLbl.Text = questions[questionNumber].QuestionName;
+            for (int i = 0; i < 5; i++)
+                radioGroup.Properties.Items[i].Description = questions[questionNumber].Answers[i].AnswerName;
+        }
+        private void GetUserAnswer()
+        {
             if (questions[questionNumber].IsAnswered)
                 radioGroup.SelectedIndex = userRadioGroupIndices[questionNumber];
             else
                 radioGroup.SelectedIndex = -1;
-            questionLbl.Text = questions[questionNumber].QuestionName;
-            for (int i = 0; i < 5; i++)
+        }
+        private void NotAnswered()
+        {
+            switch (correctAnswerIndex)
             {
-                radioGroup.Properties.Items[i].Description = questions[questionNumber].Answers[i].AnswerName;
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void AnsweredOne()
+        {
+            switch (correctAnswerIndex)
+            {
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true_1_false;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true_1_false;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true_1_false;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true_1_false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void AnsweredTwo()
+        {
+            switch (correctAnswerIndex)
+            {
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true_2_false;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true_2_false;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true_2_false;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true_2_false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void AnsweredThree()
+        {
+            switch (correctAnswerIndex)
+            {
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true_3_false;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true_3_false;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true_3_false;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true_3_false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void AnsweredFour()
+        {
+            switch (correctAnswerIndex)
+            {
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true_4_false;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true_4_false;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true_4_false;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true_4_false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void AnsweredFive()
+        {
+            switch (correctAnswerIndex)
+            {
+                case 0:
+                    radioGroup.BackgroundImage = Resources._1_true_5_false;
+                    break;
+                case 1:
+                    radioGroup.BackgroundImage = Resources._2_true_5_false;
+                    break;
+                case 2:
+                    radioGroup.BackgroundImage = Resources._3_true_5_false;
+                    break;
+                case 3:
+                    radioGroup.BackgroundImage = Resources._4_true_5_false;
+                    break;
+                case 4:
+                    radioGroup.BackgroundImage = Resources._5_true;
+                    break;
+                default:
+                    break;
             }
         }
         private void clearAnswerBtn_Click(object sender, EventArgs e)
         {
-            DevExpress.XtraEditors.SimpleButton previousButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
+            DevExpress.XtraEditors.SimpleButton currentButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
             radioGroup.SelectedIndex = -1;
             questions[questionNumber].IsAnswered = false;
             userAnswers[questionNumber] = "";
-            previousButton.Appearance.BackColor = System.Drawing.Color.Transparent;
+            currentButton.Appearance.BackColor = System.Drawing.Color.Transparent;
         }
         private void finishExamBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure about finishing the exam?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                examFinished = true;
                 int correctAnswerCounter = 0;
                 int incorrectAnswerCounter = 0;
                 int notAnsweredCounter = 0;
@@ -151,8 +324,6 @@ namespace ExamProj
                         button.Appearance.BackColor = System.Drawing.Color.Red;
                 }
             }
-            else
-                return;
         }
     }
 }

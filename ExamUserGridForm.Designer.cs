@@ -41,6 +41,10 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.colTotalQuestions = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCorrectAnswers = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIncorrectAnswers = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNotAnswered = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)this.gridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.gridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)this.teacherCheck).BeginInit();
@@ -63,7 +67,7 @@
             // 
             // gridView
             // 
-            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colID, colUsername, colPassword, colIsTeacher });
+            this.gridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colID, colUsername, colPassword, colIsTeacher, colTotalQuestions, colCorrectAnswers, colIncorrectAnswers, colNotAnswered });
             this.gridView.DetailHeight = 239;
             this.gridView.GridControl = gridControl;
             this.gridView.Name = "gridView";
@@ -196,6 +200,34 @@
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(2);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 664);
             // 
+            // colTotalQuestions
+            // 
+            this.colTotalQuestions.FieldName = "TotalQuestions";
+            this.colTotalQuestions.Name = "colTotalQuestions";
+            this.colTotalQuestions.Visible = true;
+            this.colTotalQuestions.VisibleIndex = 4;
+            // 
+            // colCorrectAnswers
+            // 
+            this.colCorrectAnswers.FieldName = "CorrectAnswers";
+            this.colCorrectAnswers.Name = "colCorrectAnswers";
+            this.colCorrectAnswers.Visible = true;
+            this.colCorrectAnswers.VisibleIndex = 5;
+            // 
+            // colIncorrectAnswers
+            // 
+            this.colIncorrectAnswers.FieldName = "IncorrectAnswers";
+            this.colIncorrectAnswers.Name = "colIncorrectAnswers";
+            this.colIncorrectAnswers.Visible = true;
+            this.colIncorrectAnswers.VisibleIndex = 6;
+            // 
+            // colNotAnswered
+            // 
+            this.colNotAnswered.FieldName = "NotAnswered";
+            this.colNotAnswered.Name = "colNotAnswered";
+            this.colNotAnswered.Visible = true;
+            this.colNotAnswered.VisibleIndex = 7;
+            // 
             // ExamUserGridForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,5 +265,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPassword;
         private DevExpress.XtraGrid.Columns.GridColumn colIsTeacher;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit teacherCheck;
+        private DevExpress.XtraGrid.Columns.GridColumn colTotalQuestions;
+        private DevExpress.XtraGrid.Columns.GridColumn colCorrectAnswers;
+        private DevExpress.XtraGrid.Columns.GridColumn colIncorrectAnswers;
+        private DevExpress.XtraGrid.Columns.GridColumn colNotAnswered;
     }
 }
