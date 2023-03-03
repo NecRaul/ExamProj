@@ -65,3 +65,5 @@ You can copy the `.sqlite` file that comes with this repo to `bin\Debug\net6.0-w
 * ~~Add coloring to which answer is correct/incorrect after the exam is done~~
 * ~~Fix the users grid to show analytics~~
 * ~~Fix username not showing up in the exam form~~
+* ~~Add another layer of randomization to questions~~
+* ~~Add an example database with 25 questions in it~~

@@ -17,7 +17,7 @@ namespace ExamProj.Services
         }
         public Answer GetAnswerByID(int id)
         {
-            return _repository.GetAll.FirstOrDefault(x => x.ID == id);
+            return _repository.GetAll.AsNoTracking().FirstOrDefault(x => x.ID == id);
         }
         public void InsertAnswer(Answer answer)
         {
@@ -33,7 +33,7 @@ namespace ExamProj.Services
         }
         public IEnumerable<Answer> GetAllAnswers()
         {
-            return _repository.GetAll;
+            return _repository.GetAll.AsNoTracking();
         }
     }
 }

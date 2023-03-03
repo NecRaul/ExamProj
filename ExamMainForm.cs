@@ -43,7 +43,7 @@ namespace ExamProj
             {
                 int index;
                 int i = 0;
-                while(questions.Count < 25)
+                while (questions.Count < 25)
                 {
                     i++;
                     index = random.Next(easyQuestions.Count);
@@ -58,6 +58,7 @@ namespace ExamProj
                     if (!questions.Contains(hardQuestions[index]))
                         questions.Add(hardQuestions[index]);
                 }
+                questions = questions.OrderBy(x => random.Next()).ToList();
             }
             for (int i = 0; i < 25; i++)
             {
