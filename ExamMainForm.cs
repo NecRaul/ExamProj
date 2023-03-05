@@ -47,16 +47,16 @@ namespace ExamProj
                 {
                     i++;
                     index = random.Next(easyQuestions.Count);
-                    if (!questions.Contains(easyQuestions[index]))
-                        questions.Add(easyQuestions[index]);
+                    questions.Add(easyQuestions[index]);
+                    easyQuestions.Remove(easyQuestions[index]);
                     index = random.Next(normalQuestions.Count);
-                    if (!questions.Contains(easyQuestions[index]))
-                        questions.Add(normalQuestions[index]);
+                    questions.Add(normalQuestions[index]);
+                    normalQuestions.Remove(normalQuestions[index]);
                     if (i % 2 == 0)
                         continue;
                     index = random.Next(hardQuestions.Count);
-                    if (!questions.Contains(hardQuestions[index]))
-                        questions.Add(hardQuestions[index]);
+                    questions.Add(hardQuestions[index]);
+                    hardQuestions.Remove(hardQuestions[index]);
                 }
                 questions = questions.OrderBy(x => random.Next()).ToList();
             }
