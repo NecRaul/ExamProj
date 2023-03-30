@@ -85,6 +85,15 @@ namespace ExamProj
             DevExpress.XtraEditors.SimpleButton currentButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
             ChangeAnsweredQuestionColor(currentButton);
         }
+        private string test(string description, string backgroundColor)
+        {
+            string prefix = $"<backcolor={backgroundColor}><color=white><p>";
+            string suffix = "</p></color></backcolor>";
+            string returnString = prefix + description;
+            for (int i = 0; i < 200 - description.Length; i++)
+                returnString += "<nbsp>";
+            return returnString + suffix;
+        }
         private void question_Click(object sender, EventArgs e)
         {
             DevExpress.XtraEditors.SimpleButton nextButton = sender as DevExpress.XtraEditors.SimpleButton;
@@ -96,24 +105,15 @@ namespace ExamProj
             if (!examFinished)
                 return;
             correctAnswerIndex = questions[questionNumber].Answers.FindIndex(x => x.IsCorrect);
-
-            
             if (radioGroup.SelectedIndex==correctAnswerIndex && radioGroup.SelectedIndex != -1 )
+                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, test(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "green"));
+            else if (radioGroup.SelectedIndex != correctAnswerIndex && radioGroup.SelectedIndex!=-1)
             {
-                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, $"<color=green>{radioGroup.Properties.Items[radioGroup.SelectedIndex].Description}</color>");
-
-            }
-            else if (radioGroup.SelectedIndex != correctAnswerIndex && radioGroup.SelectedIndex!=-1) {
-                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, $"<color=green>{radioGroup.Properties.Items[correctAnswerIndex].Description}</color>");
-
-                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, $"<color=red>{radioGroup.Properties.Items[radioGroup.SelectedIndex].Description}</color>");
-
+                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, test(radioGroup.Properties.Items[correctAnswerIndex].Description, "green"));
+                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, test(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "red"));
             }
             else
-            {
-                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, $"<color=green>{radioGroup.Properties.Items[correctAnswerIndex].Description}</color>");
-
-            }
+                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, test(radioGroup.Properties.Items[correctAnswerIndex].Description, "orange"));
             //switch (radioGroup.SelectedIndex)
             //{
             //    case -1:

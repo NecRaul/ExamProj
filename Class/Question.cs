@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 namespace ExamProj.Class
 {
-  
     public class Question : BaseEntity
     {
         public string Difficulty { get; set; }
