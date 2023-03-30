@@ -1,18 +1,15 @@
-﻿using DevExpress.Utils;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
+﻿using DevExpress.XtraEditors.Controls;
 using ExamProj.Class;
 using ExamProj.Context;
-using ExamProj.Properties;
 using ExamProj.Repositories;
 using ExamProj.Services;
 using ExamProj.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
 namespace ExamProj
 {
     public partial class ExamMainForm : DevExpress.XtraEditors.XtraForm
@@ -76,7 +73,7 @@ namespace ExamProj
             {
                 questionLbl.Text = questions[0].QuestionName;
                 for (int i = 0; i < 5; i++)
-                    radioGroup.Properties.Items[i].Description = questions[0].Answers[i].AnswerName;
+                    radioGroup.Properties.Items[i].Description = "\t" + questions[0].Answers[i].AnswerName;
             }
             questionNumber = 0;
         }
@@ -84,15 +81,6 @@ namespace ExamProj
         {
             DevExpress.XtraEditors.SimpleButton currentButton = Controls.Find($"question{questionNumber + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
             ChangeAnsweredQuestionColor(currentButton);
-        }
-        private string test(string description, string backgroundColor)
-        {
-            string prefix = $"<backcolor={backgroundColor}><color=white><p>";
-            string suffix = "</p></color></backcolor>";
-            string returnString = prefix + description;
-            for (int i = 0; i < 200 - description.Length; i++)
-                returnString += "<nbsp>";
-            return returnString + suffix;
         }
         private void question_Click(object sender, EventArgs e)
         {
@@ -105,38 +93,7 @@ namespace ExamProj
             if (!examFinished)
                 return;
             correctAnswerIndex = questions[questionNumber].Answers.FindIndex(x => x.IsCorrect);
-            if (radioGroup.SelectedIndex==correctAnswerIndex && radioGroup.SelectedIndex != -1 )
-                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, test(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "green"));
-            else if (radioGroup.SelectedIndex != correctAnswerIndex && radioGroup.SelectedIndex!=-1)
-            {
-                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, test(radioGroup.Properties.Items[correctAnswerIndex].Description, "green"));
-                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, test(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "red"));
-            }
-            else
-                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, test(radioGroup.Properties.Items[correctAnswerIndex].Description, "orange"));
-            //switch (radioGroup.SelectedIndex)
-            //{
-            //    case -1:
-            //        NotAnswered();
-            //        break;
-            //    case 0:
-            //        AnsweredOne();
-            //        break;
-            //    case 1:
-            //        AnsweredTwo();
-            //        break;
-            //    case 2:
-            //        AnsweredThree();
-            //        break;
-            //    case 3:
-            //        AnsweredFour();
-            //        break;
-            //    case 4:
-            //        AnsweredFive();
-            //        break;
-            //    default:
-            //        break;
-            //}
+            ColorAnswer();
         }
         private void ChangeAnsweredQuestionColor(DevExpress.XtraEditors.SimpleButton currentButton)
         {
@@ -153,7 +110,7 @@ namespace ExamProj
         {
             questionLbl.Text = questions[questionNumber].QuestionName;
             for (int i = 0; i < 5; i++)
-                radioGroup.Properties.Items[i].Description = questions[questionNumber].Answers[i].AnswerName;
+                radioGroup.Properties.Items[i].Description = "\t" + questions[questionNumber].Answers[i].AnswerName;
         }
         private void GetUserAnswer()
         {
@@ -162,165 +119,25 @@ namespace ExamProj
             else
                 radioGroup.SelectedIndex = -1;
         }
-        private void NotAnswered()
+        private string BackgroundColor(string answer, string backgroundColor)
         {
-            switch (correctAnswerIndex)
-            {
-                case 0:
-
-                    // Create a new RadioGroup control
-
-                    // Create a new RadioGroupItem with HTML text and a color style
-                    RadioGroupItem radioGroupItem = new RadioGroupItem();
-                    radioGroupItem.Description = "<bgcolor=green>Green</bgcolor>";
-
-                    // Set the AllowHtmlDraw property to true
-                    radioGroup.Properties.AllowHtmlDraw = DefaultBoolean.True;
-
-                    // Add the RadioGroupItem to the RadioGroup control
-                    radioGroup.Properties.Items.Add(radioGroupItem);
-
-                    //radioGroup.BackgroundImage = Resources._1_true;
-                    break;
-                case 1:
-
-                    radioGroup.Properties.Items[1] = new RadioGroupItem(0, "<color=green>Green</color>");
-
-                    //radioGroup.BackgroundImage = Resources._2_true;
-                    break;
-                case 2:
-                    radioGroup.Properties.Items[2] = new RadioGroupItem(0, "<backGroundColor=green>Green</color>");
-
-                    //radioGroup.BackgroundImage = Resources._3_true;
-                    break;
-                case 3:
-                    radioGroup.Properties.Items[3] = new RadioGroupItem(0, "<color=green>Green</color>");
-
-                    //radioGroup.BackgroundImage = Resources._4_true;
-                    break;
-                case 4:
-                    radioGroup.Properties.Items[4] = new RadioGroupItem(0, "<color=green>Green</color>");
-
-                    //radioGroup.BackgroundImage = Resources._5_true;
-                    break;
-                default:
-                    break;
-            }
+            string prefix = $"<backcolor={backgroundColor}><color=white><p>";
+            string answerWithoutSuffix = prefix + answer;
+            for (int i = 0; i < 200 - answer.Length; i++)
+                answerWithoutSuffix += "<nbsp>";
+            return answerWithoutSuffix + "</p></color></backcolor>";
         }
-        private void AnsweredOne()
+        private void ColorAnswer()
         {
-            switch (correctAnswerIndex)
+            if (radioGroup.SelectedIndex == correctAnswerIndex && radioGroup.SelectedIndex != -1)
+                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, BackgroundColor(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "green"));
+            else if (radioGroup.SelectedIndex != correctAnswerIndex && radioGroup.SelectedIndex != -1)
             {
-                case 0:
-                    radioGroup.BackgroundImage = Resources._1_true;
-                    break;
-                case 1:
-                    radioGroup.BackgroundImage = Resources._2_true_1_false;
-                    break;
-                case 2:
-                    radioGroup.BackgroundImage = Resources._3_true_1_false;
-                    break;
-                case 3:
-                    radioGroup.BackgroundImage = Resources._4_true_1_false;
-                    break;
-                case 4:
-                    radioGroup.BackgroundImage = Resources._5_true_1_false;
-                    break;
-                default:
-                    break;
+                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, BackgroundColor(radioGroup.Properties.Items[correctAnswerIndex].Description, "green"));
+                radioGroup.Properties.Items[radioGroup.SelectedIndex] = new RadioGroupItem(radioGroup.SelectedIndex, BackgroundColor(radioGroup.Properties.Items[radioGroup.SelectedIndex].Description, "red"));
             }
-        }
-        private void AnsweredTwo()
-        {
-            switch (correctAnswerIndex)
-            {
-                case 0:
-                    radioGroup.BackgroundImage = Resources._1_true_2_false;
-                    break;
-                case 1:
-                    radioGroup.BackgroundImage = Resources._2_true;
-                    break;
-                case 2:
-                    radioGroup.BackgroundImage = Resources._3_true_2_false;
-                    break;
-                case 3:
-                    radioGroup.BackgroundImage = Resources._4_true_2_false;
-                    break;
-                case 4:
-                    radioGroup.BackgroundImage = Resources._5_true_2_false;
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void AnsweredThree()
-        {
-            switch (correctAnswerIndex)
-            {
-                case 0:
-                    radioGroup.BackgroundImage = Resources._1_true_3_false;
-                    break;
-                case 1:
-                    radioGroup.BackgroundImage = Resources._2_true_3_false;
-                    break;
-                case 2:
-                    radioGroup.BackgroundImage = Resources._3_true;
-                    break;
-                case 3:
-                    radioGroup.BackgroundImage = Resources._4_true_3_false;
-                    break;
-                case 4:
-                    radioGroup.BackgroundImage = Resources._5_true_3_false;
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void AnsweredFour()
-        {
-            switch (correctAnswerIndex)
-            {
-                case 0:
-                    radioGroup.BackgroundImage = Resources._1_true_4_false;
-                    break;
-                case 1:
-                    radioGroup.BackgroundImage = Resources._2_true_4_false;
-                    break;
-                case 2:
-                    radioGroup.BackgroundImage = Resources._3_true_4_false;
-                    break;
-                case 3:
-                    radioGroup.BackgroundImage = Resources._4_true;
-                    break;
-                case 4:
-                    radioGroup.BackgroundImage = Resources._5_true_4_false;
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void AnsweredFive()
-        {
-            switch (correctAnswerIndex)
-            {
-                case 0:
-                    radioGroup.BackgroundImage = Resources._1_true_5_false;
-                    break;
-                case 1:
-                    radioGroup.BackgroundImage = Resources._2_true_5_false;
-                    break;
-                case 2:
-                    radioGroup.BackgroundImage = Resources._3_true_5_false;
-                    break;
-                case 3:
-                    radioGroup.BackgroundImage = Resources._4_true_5_false;
-                    break;
-                case 4:
-                    radioGroup.BackgroundImage = Resources._5_true;
-                    break;
-                default:
-                    break;
-            }
+            else
+                radioGroup.Properties.Items[correctAnswerIndex] = new RadioGroupItem(correctAnswerIndex, BackgroundColor(radioGroup.Properties.Items[correctAnswerIndex].Description, "orange"));
         }
         private void clearAnswerBtn_Click(object sender, EventArgs e)
         {
@@ -336,6 +153,7 @@ namespace ExamProj
             if (result == DialogResult.Yes)
             {
                 examFinished = true;
+                ColorAnswer();
                 int correctAnswerCounter = 0;
                 int incorrectAnswerCounter = 0;
                 int notAnsweredCounter = 0;
@@ -347,6 +165,13 @@ namespace ExamProj
                         notAnsweredCounter++;
                     else
                         incorrectAnswerCounter++;
+                    DevExpress.XtraEditors.SimpleButton button = Controls.Find($"question{i + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
+                    if (userAnswers[i] == questions[i].CorrectAnswer)
+                        button.Appearance.BackColor = System.Drawing.Color.Green;
+                    else if (userAnswers[i] == "")
+                        button.Appearance.BackColor = System.Drawing.Color.DarkOrange;
+                    else
+                        button.Appearance.BackColor = System.Drawing.Color.Red;
                 }
                 MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}", "Exam finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 radioGroup.Enabled = false;
@@ -360,16 +185,6 @@ namespace ExamProj
                     _userServices.UpdateUser(user);
                 else
                     _userServices.InsertUser(user);
-                for (int i = 0; i < 25; i++)
-                {
-                    DevExpress.XtraEditors.SimpleButton button = Controls.Find($"question{i + 1}", true).FirstOrDefault() as DevExpress.XtraEditors.SimpleButton;
-                    if (userAnswers[i] == questions[i].CorrectAnswer)
-                        button.Appearance.BackColor = System.Drawing.Color.Green;
-                    else if (userAnswers[i] == "")
-                        button.Appearance.BackColor = System.Drawing.Color.DarkOrange;
-                    else
-                        button.Appearance.BackColor = System.Drawing.Color.Red;
-                }
             }
         }
     }
