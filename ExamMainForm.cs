@@ -100,7 +100,7 @@ namespace ExamProj
             if (radioGroup.SelectedIndex != -1)
             {
                 questions[questionNumber].IsAnswered = true;
-                userAnswers[questionNumber] = radioGroup.Properties.Items[radioGroup.SelectedIndex].Description;
+                userAnswers[questionNumber] = radioGroup.Properties.Items[radioGroup.SelectedIndex].Description.Substring(1);
                 userRadioGroupIndices[questionNumber] = radioGroup.SelectedIndex;
                 if (!examFinished)
                     currentButton.Appearance.BackColor = System.Drawing.Color.Yellow;
