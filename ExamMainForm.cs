@@ -39,7 +39,7 @@ namespace ExamProj
             Random random = new Random();
             if (easyQuestions.Count < 10 || normalQuestions.Count < 10 || hardQuestions.Count < 5)
             {
-                MessageBox.Show("There are not questions for an exam.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("There are not questions for an exam.", "Not Enough Questions", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
             else
@@ -149,7 +149,7 @@ namespace ExamProj
         }
         private void finishExamBtn_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure about finishing the exam?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure about finishing the exam?", "Finished?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 examFinished = true;
@@ -173,7 +173,7 @@ namespace ExamProj
                     else
                         button.Appearance.BackColor = System.Drawing.Color.Red;
                 }
-                MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}", "Exam finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Correct Answers: {correctAnswerCounter}\nIncorrect Answers: {incorrectAnswerCounter}\nNot Answered: {notAnsweredCounter}", "Exam Finished", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 radioGroup.Enabled = false;
                 clearAnswerBtn.Enabled = false;
                 finishExamBtn.Enabled = false;
