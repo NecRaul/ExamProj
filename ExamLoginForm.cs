@@ -21,6 +21,10 @@ namespace ExamProj
         }
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            if (usernameTxt.Text == "")
+                MessageBox.Show("Please enter a username.", "No Username.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            else if (passwordTxt.Text == "")
+                MessageBox.Show("Please enter a password.", "No Password.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             user = _userServices.GetAllUsers().FirstOrDefault(x => x.Username == usernameTxt.Text && x.Password == passwordTxt.Text);
             if (user == null)
             {
