@@ -97,6 +97,7 @@
             this.Name = "ExamLoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.AcceptButton = loginBtn;
             ((System.ComponentModel.ISupportInitialize)this.usernameTxt.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.passwordTxt.Properties).EndInit();
             this.ResumeLayout(false);
