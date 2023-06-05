@@ -116,6 +116,7 @@
             this.Name = "ExamUserCRUDForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User CRUD";
+            this.AcceptButton = saveBtn;
             ((System.ComponentModel.ISupportInitialize)this.teacherChk.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.passwordTxt.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.usernameTxt.Properties).EndInit();

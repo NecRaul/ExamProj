@@ -194,6 +194,7 @@
             this.Name = "ExamQuestionCRUDForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Question CRUD";
+            this.AcceptButton = saveBtn;
             ((System.ComponentModel.ISupportInitialize)this.isCorrectCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.gridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)this.gridControl).EndInit();
