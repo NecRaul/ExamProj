@@ -35,7 +35,7 @@ namespace ExamProj
                 user = new User();
             }
             else
-                MessageBox.Show("Select a user.", "Incorrect line", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a user.", "Incorrect Line", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         private void newBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -49,17 +49,17 @@ namespace ExamProj
             DialogResult result;
             if (gridView.FocusedRowHandle > -1)
             {
-                result = MessageBox.Show("Are you sure about deleting this user?", "User", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                result = MessageBox.Show("Are you sure about deleting this user?", "Delete User?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     var selectedUser = Convert.ToInt32(gridView.GetFocusedRowCellValue("ID"));
                     _userServices.DeleteUser(selectedUser);
                     RefreshUsers();
-                    MessageBox.Show($"User {selectedUser} was deleted.", "Delete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"User {selectedUser} was deleted.", "User Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
-                MessageBox.Show("Select a user.", "Incorrect line", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Select a user.", "Incorrect Line", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace ExamProj
             user = _userServices.GetAllUsers().FirstOrDefault(x => x.Username == usernameTxt.Text && x.Password == passwordTxt.Text);
             if (user == null)
             {
-                MessageBox.Show("Username or password is incorrect.", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Username or password is incorrect.", "User Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
