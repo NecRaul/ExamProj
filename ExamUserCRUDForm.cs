@@ -4,6 +4,7 @@ using ExamProj.Repositories;
 using ExamProj.Services;
 using ExamProj.Services.Interfaces;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ExamProj
@@ -28,12 +29,22 @@ namespace ExamProj
             user.IsTeacher = teacherChk.Checked;
             if (user.Username == "")
             {
-                MessageBox.Show("Username can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username can't be empty!", "No Username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             else if (user.Password == "")
             {
-                MessageBox.Show("Password can't be empty!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Password can't be empty!", "No Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!Regex.Match(user.Username, "^[A-Za-z0-9_-]*$").Success)
+            {
+                MessageBox.Show("Please enter a valid username.", "Invalid Username", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if (!Regex.Match(user.Password, "^[A-Za-z0-9_-]*$").Success)
+            {
+                MessageBox.Show("Please enter a valid password.", "Invalid Password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (user.ID != 0)
